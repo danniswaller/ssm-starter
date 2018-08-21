@@ -6,35 +6,21 @@ import java.time.LocalDateTime;
  * Created by danniswalle on 2018/8/20.
  */
 public class User {
-    //~ Instance fields --------------------------------------------------------------------------------------------------
+
 
     private LocalDateTime createAt;
     private LocalDateTime createBy;
-
     private String        id;
     private String        password;
     private LocalDateTime updateAt;
     private LocalDateTime updateBy;
     private String        username;
 
-    //~ Methods ----------------------------------------------------------------------------------------------------------
 
-    /**
-     * getter method for create at.
-     *
-     * @return  LocalDateTime
-     */
     public LocalDateTime getCreateAt() {
         return createAt;
     }
 
-    //~ ------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * getter method for create by.
-     *
-     * @return  LocalDateTime
-     */
     public LocalDateTime getCreateBy() {
         return createBy;
     }
@@ -198,5 +184,5 @@ public class User {
 
         return this;
     }
-} // end class User
+}
 

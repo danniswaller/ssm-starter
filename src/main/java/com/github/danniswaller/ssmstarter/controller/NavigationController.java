@@ -32,4 +32,4 @@ import org.springframework.web.bind.annotation.GetMapping;
     public String toLoginPage() {
         return "login";
     }
-} // end class NavigationController
+}

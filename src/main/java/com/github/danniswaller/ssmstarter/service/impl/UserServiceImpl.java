@@ -22,14 +22,14 @@ import java.util.Set;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-    //~ Instance fields --------------------------------------------------------------------------------------------------
+
 
     @Autowired
     private RoleMapper roleMapper;
 
     @Autowired private UserMapper userMapper;
 
-    //~ Methods ----------------------------------------------------------------------------------------------------------
+
 
     @Override public List<User> findAllUsers() {
         return userMapper.findAllUsers();
@@ -57,4 +57,4 @@ public class UserServiceImpl implements UserService {
     }
 
 
-} // end class UserServiceImpl
+}

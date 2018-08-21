@@ -6,23 +6,14 @@ import java.util.Objects;
  * Created by danniswalle on 2018/8/20.
  */
 
-/**
- * TODO: DOCUMENT ME!
- *
- * @author   $author$
- * @version  08/20/2018 13:27
- */
+
 public class Role {
-    //~ Instance fields --------------------------------------------------------------------------------------------------
+
 
     private String id;
     private String name;
 
-    //~ Methods ----------------------------------------------------------------------------------------------------------
 
-    /**
-     * @see  java.lang.Object#equals(java.lang.Object)
-     */
     @Override public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -98,4 +89,4 @@ public class Role {
 
         return this;
     }
-} // end class Role
+}
