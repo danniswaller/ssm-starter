@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+  <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+  <springProperty scope="context" name="profile" source="spring.profiles.active"/>
+
+  <property name="LOG_FILE" value="log/${springAppName}"/>​
+
+  <property name="CONSOLE_LOG_PATTERN"
+            value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} [%p] %clr([${HOSTNAME:-} ${springAppName:-}]){yellow} %clr(${PID:- }){magenta} %clr(--){faint} %clr([%t]){faint} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+
+  <property name="STRING_LOG_PATTERN"
+            value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] [${springAppName:-}] ${PID:- } -- [%t] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+  <property name="JSON_LOG_PATTERN"
+            value='{
+                        "severity": "%level",
+                        "hostname": "${HOSTNAME:-}",
+                        "service": "${springAppName:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "message": "%message"
+                        }'/>
+
+
+  <appender name="stdout.log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_FILE}.stdout.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_FILE}.stdout.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+      <maxFileSize>20MB</maxFileSize>
+      <maxHistory>1</maxHistory>
+      <totalSizeCap>20GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${STRING_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>NEUTRAL</onMismatch>
+    </filter>
+
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>DEBUG</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+
+  <appender name="stderr.log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_FILE}.stderr.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_FILE}.stderr.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+      <maxFileSize>20MB</maxFileSize>
+      <maxHistory>1</maxHistory>
+      <totalSizeCap>20GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${STRING_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>WARN</level>
+    </filter>
+  </appender>
+
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <!-- Minimum logging level to be presented in the console logs  -->
+      <level>DEBUG</level>
+    </filter>
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+  </appender>
+
+  <logger name="org.springframework" level="INFO"/>
+  <logger name="com.github.danniswaller" level="INFO"/>
+  ​
+  <root level="INFO">
+    <appender-ref ref="console"/>
+  </root>
+
+</configuration>

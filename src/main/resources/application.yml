@@ -1,0 +1,48 @@
+server:
+  port: 6789
+
+spring:
+  application:
+    name: ssm-starter
+  profiles:
+    active: dev
+  mvc:
+    static-path-pattern: /static/**
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    test-on-borrow: false
+    test-while-idle: true
+    min-evictable-idle-time-millis: 1800000
+    time-between-eviction-runs-millis: 300000
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud: DEBUG
+    org.springframework.web: DEBUG
+    com.github.danniswaller: DEBUG
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+---
+spring:
+  profiles: dev
+  resources:
+#    static-locations: file:///${user.dir}/src/main/resources/static/
+  thymeleaf:
+    check-template: false
+#    prefix: file:///${user.dir}/src/main/resources/templates/
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/ssm_starter?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: Passw0rd
+
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://localhost:3306/ssm_starter?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: Passw0rd
